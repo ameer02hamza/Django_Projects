@@ -1,0 +1,31 @@
+{% extends "Blog/master.html" %}
+{% block content %}
+        <div class="card mb-4">
+          <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{blog.post_title}} </h2>
+            <p class="card-text">{{blog.post_content}}</p>
+
+               <a href="/blog/updateblog/{{blog.id}} " class="btn btn-primary">Update Blog</a>
+               <a href="/blog/delete/{{blog.id}} " class="btn btn-primary">Delete Blog</a>
+          </div>
+             <div class="card-body">
+
+                 {% for cmt in cmnts %}
+            <h4 class="card-title">{{cmt.owner_username}}</h4>
+            <p class="card-text">{{cmt.comment_content}}</p>
+                  <a href="/blog/comnt/{{cmt.id}}" class="btn">Delete comment</a>
+             {% endfor %}
+                 <form method="post">
+                        {% csrf_token %}
+                     <input type="text" name="comment">
+                     <input type="submit" value="Post">
+                 </form>
+                 
+          </div>
+          <div class="card-footer text-muted">
+
+            Posted on {{blog.post_Date}}   Posted by {{blog.owner_email}}
+          </div>
+        </div>
+{% endblock %}

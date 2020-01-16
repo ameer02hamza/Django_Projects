@@ -1,0 +1,23 @@
+{% extends "Blog/master.html" %}
+{% block heading%}  <h1 class="my-4">Blogs
+          <small>Read Now</small>
+        </h1>{% endblock %}
+ <!-- Blog Post -->
+{% block content %}
+{% for blog in blogs %}
+        <div class="card mb-4">
+          <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{blog.post_title}} </h2>
+            <p class="card-text">{{blog.post_content|truncatechars:100}}</p>
+            <a href="/blog/detailblog/{{blog.id}} " class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{blog.post_Date}}                  Posted by {{blog.owner_email}}
+          </div>
+
+        </div>
+{% endfor %}
+{% endblock %}
+
+        <!-- Blog Post -->
