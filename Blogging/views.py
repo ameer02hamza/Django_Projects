@@ -84,14 +84,17 @@ def addblog(request):
 def editview(request,id):
     blogid = blogs.objects.get(id=id)
     context = {"blog":blogid}
-    un = User.objects.get(username=request.user.username)
+
     if request.method =="POST":
         pid = request.POST['id']
         utitle = request.POST['utitle']
         ublog = request.POST['ublog']
         print(pid," ",utitle," space ", ublog)
-        u = blogs(id=pid, post_title=utitle, post_content=ublog, owner_email=un)
-        u.save()
+        blogid.post_title = utitle
+        blogid.post_content = ublog
+        blogid.save()
+
+
         return redirect(blog)
     else:
         return render(request, "Blog/updateblog.html", context)
